@@ -1,0 +1,252 @@
+{
+  "auditedAt": "2026-09-30T02:29:03.228Z",
+  "pass": false,
+  "stats": {
+    "series": 7,
+    "members": 11,
+    "variants": 91,
+    "files": 898,
+    "quantizers": [
+      "0ppxnhximxr",
+      "6block",
+      "Abiray",
+      "AesSedai",
+      "Amynnnn",
+      "AtomicChat",
+      "Coder40-95",
+      "GrEarl",
+      "Kuberwastaken",
+      "L-Alchemyst",
+      "Mungert",
+      "NANI-Nithin",
+      "Preyazz",
+      "abenzerps",
+      "aj9o9",
+      "apetersson",
+      "aria220",
+      "backpack-run",
+      "bartowski",
+      "batiai",
+      "bullerwins",
+      "byteshape",
+      "ddh0",
+      "ggml-org",
+      "giladgd",
+      "gooseyai",
+      "indiansatoshi",
+      "lausannequants",
+      "lmstudio-community",
+      "mradermacher",
+      "muzzy",
+      "ngquocvinh",
+      "openbmb",
+      "prithivMLmods",
+      "qtum",
+      "sokann",
+      "tarruda",
+      "teamblobfish",
+      "unsloth",
+      "vcruz305",
+      "zurichquants"
+    ],
+    "byLicense": {
+      "mit": 16,
+      "apache-2.0": 48,
+      "other": 27,
+      "cc0-1.0": 1
+    },
+    "byTier": {
+      "极限压缩": 169,
+      "长上下文优先": 193,
+      "平衡档": 228,
+      "保守档": 186,
+      "近似无损": 122
+    }
+  },
+  "problems": [
+    "[A] bullerwins/DeepSeek-V4-Flash-GGUF: 量化变体缺 license",
+    "[A] ddh0/DeepSeek-V4-Flash-GGUF: 量化变体缺 license",
+    "[A] AesSedai/GLM-5.3-GGUF: 量化变体缺 license",
+    "[A] AesSedai/GLM-5.3-Flash-GGUF: 量化变体缺 license",
+    "[A] ddh0/GLM-5.3-Flash-GGUF: 量化变体缺 license",
+    "[A] bartowski/openai_gpt-oss-20b-GGUF: 量化变体缺 license",
+    "[A] bullerwins/Kimi-K3-GGUF: 量化变体缺 license",
+    "[A] bartowski/Qwen3.8-27B-GGUF: 量化变体缺 license",
+    "[A] AtomicChat/Qwen3.8-27B-GGUF: 量化变体缺 license",
+    "[A] AesSedai/Qwen3.8-Flash-Next-GGUF: 量化变体缺 license"
+  ],
+  "warnings": [],
+  "needManualLicense": [
+    {
+      "repo": "bullerwins/DeepSeek-V4-Flash-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "ddh0/DeepSeek-V4-Flash-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "batiai/gemma-4-E4B-it-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "unsloth/GLM-5.3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "L-Alchemyst/GLM-5.3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "AesSedai/GLM-5.3-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "Coder40-95/GLM-5.3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "sokann/GLM-5.3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "0ppxnhximxr/GLM-5.3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "AesSedai/GLM-5.3-Flash-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "ddh0/GLM-5.3-Flash-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "bartowski/openai_gpt-oss-20b-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "unsloth/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "AtomicChat/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "Kuberwastaken/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "vcruz305/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "6block/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "GrEarl/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "qtum/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "bullerwins/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "aria220/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "Amynnnn/Kimi-K3-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "bartowski/Qwen3.8-27B-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "AtomicChat/Qwen3.8-27B-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "unsloth/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "AtomicChat/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "bartowski/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "lmstudio-community/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "ggml-org/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "apetersson/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "AesSedai/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": null
+    },
+    {
+      "repo": "batiai/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "vcruz305/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    },
+    {
+      "repo": "mradermacher/Qwen3.8-Flash-Next-GGUF",
+      "level": "variant",
+      "license": "other"
+    }
+  ],
+  "unrecognizedQuants": []
+}
