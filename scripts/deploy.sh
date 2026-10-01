@@ -28,10 +28,26 @@ echo "待推 $NFILES 个文件"
 
 # 2. 逐个 PUT（每个文件单独查一次远程 sha —— PUT 时不带 sha 会 422）
 #    注：不需要预先拉整棵树，16 个文件逐个查更快也更简单。
-ok=0; fail=0
+ok=0; fail=0; skip=0
 while IFS= read -r rel; do
   [ -z "$rel" ] && continue
   local_sha="$("$GH" api "repos/$REPO/contents/$rel" --jq '.sha' 2>/dev/null || echo '')"
+
+  # 内容未变就跳过（git blob sha1 比对）。Pages 每次 commit 都触发一次构建，
+  # 无谓重推 16 个文件 = 16 次构建，其中大部分会因构建中途文件不全而 failed。
+  if [ -n "$local_sha" ]; then
+    mine=$(node -e '
+      const crypto=require("crypto"), fs=require("fs");
+      const b=fs.readFileSync(process.argv[1]);
+      console.log(crypto.createHash("sha1")
+        .update(Buffer.concat([Buffer.from("blob "+b.length+"\0"), b]))
+        .digest("hex"));
+    ' "$SITE/$rel")
+    if [ "$mine" = "$local_sha" ]; then
+      skip=$((skip+1)); continue
+    fi
+  fi
+
   # 内容读取与 body 组装都交给 node（纯文件 IO，不 spawn 外部进程）
   node -e '
     const fs=require("fs");
@@ -50,7 +66,7 @@ done < "$LIST"
 rm -f "$TMP" "$LIST"
 
 echo ""
-echo "更新 $ok | 失败 $fail"
+echo "更新 $ok | 未变跳过 $skip | 失败 $fail"
 
 # 4. 启用 Pages
 if ! "$GH" api "repos/$REPO/pages" >/dev/null 2>&1; then
