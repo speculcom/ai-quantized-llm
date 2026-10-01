@@ -34,7 +34,7 @@
    },
    "note": "许可为 other，须读发布页原文。",
    "license": "other",
-   "licenseLink": null,
+   "licenseLink": "https://huggingface.co/zai-org/GLM-5.3/blob/main/LICENSE",
    "licenseName": "glm-5.3",
    "pipeline": "text-generation",
    "downloads": 1363500,
@@ -192,8 +192,8 @@
        "path": "UD-Q5_K_XL/GLM-5.3-UD-Q5_K_XL.gguf",
        "sizeBytes": 562466263429,
        "sizeGB": 562.47,
-       "quant": "Q5_K",
-       "bitsPerWeight": 5.69,
+       "quant": "UD-Q5_K_XL",
+       "bitsPerWeight": 5.84,
        "tier": "保守档",
        "tierDesc": "体积接近原始精度",
        "isSharded": true,
@@ -301,7 +301,7 @@
      "isOfficial": false,
      "repo": "AesSedai/GLM-5.3-GGUF",
      "url": "https://huggingface.co/AesSedai/GLM-5.3-GGUF",
-     "license": null,
+     "license": "other",
      "licenseLink": null,
      "downloads": 1329,
      "likes": 7,
@@ -317,7 +317,7 @@
      "coverage": 5,
      "totalGB": 1809.3,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 469.17,
       "tier": "平衡档",
       "name": "GLM-5.3-Q4_K_M.gguf"
@@ -367,7 +367,7 @@
        "path": "Q4_K_M/GLM-5.3-Q4_K_M.gguf",
        "sizeBytes": 469166560672,
        "sizeGB": 469.17,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -380,7 +380,7 @@
        "path": "Q5_K_M/GLM-5.3-Q5_K_M.gguf",
        "sizeBytes": 561650964192,
        "sizeGB": 561.65,
-       "quant": "Q5_K",
+       "quant": "Q5_K_M",
        "bitsPerWeight": 5.69,
        "tier": "保守档",
        "tierDesc": "几乎无质量损失",
@@ -389,7 +389,9 @@
        "authorLabeled": false
       }
      ],
-     "variantCount": 5
+     "variantCount": 5,
+     "licenseInherited": true,
+     "licenseFrom": "zai-org/GLM-5.3"
     },
     {
      "quantizer": "Coder40-95",
@@ -540,8 +542,8 @@
        "path": "UD-Q5_K_XL/GLM-5.3-UD-Q5_K_XL.gguf",
        "sizeBytes": 562466263429,
        "sizeGB": 562.47,
-       "quant": "Q5_K",
-       "bitsPerWeight": 5.69,
+       "quant": "UD-Q5_K_XL",
+       "bitsPerWeight": 5.84,
        "tier": "保守档",
        "tierDesc": "体积接近原始精度",
        "isSharded": true,
@@ -743,7 +745,7 @@
      "coverage": 3,
      "totalGB": 912.4,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 454.85,
       "tier": "平衡档",
       "name": "GLM-5.3-Q4_K_M.gguf"
@@ -780,7 +782,7 @@
        "path": "Q4_K_M/GLM-5.3-Q4_K_M.gguf",
        "sizeBytes": 454852926208,
        "sizeGB": 454.85,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -792,7 +794,40 @@
      "variantCount": 3
     }
    ],
-   "variantCount": 7
+   "variantCount": 7,
+   "declaredParams": 753329940480,
+   "declaredBreakdown": {
+    "parameters": {
+     "BF16": 2103729152,
+     "F8_E4M3": 751226191872,
+     "F32": 19456
+    }
+   },
+   "createdAt": "2026-08-25T06:42:50.000Z",
+   "libraryName": "transformers",
+   "pipelineTag": "text-generation",
+   "tags": [
+    "text-generation",
+    "conversational",
+    "arXiv:2602.15763",
+    "license:other"
+   ],
+   "hfArch": [
+    "GlmMoeDsaForCausalLM"
+   ],
+   "modelType": "glm_moe_dsa",
+   "inference": "warm",
+   "usedStorage": 755681496428,
+   "gated": false,
+   "derivedParams": 753994013968,
+   "derivedSpread": 18.2,
+   "derivedSamples": {
+    "cluster": 28,
+    "total": 42,
+    "from": "UD-Q4_K_XL",
+    "to": "Q2_K"
+   },
+   "declaredVsDerived": -0.1
   },
   {
    "repo": "zai-org/GLM-5.3-Flash",
@@ -808,7 +843,7 @@
    },
    "note": "MIT 许可，本地部署法律上最干净的 GLM 选项。",
    "license": "mit",
-   "licenseLink": null,
+   "licenseLink": "https://opensource.org/license/mit",
    "licenseName": null,
    "pipeline": "image-text-to-text",
    "downloads": 4699117,
@@ -966,8 +1001,8 @@
        "path": "UD-Q5_K_XL/GLM-5.3-Flash-UD-Q5_K_XL.gguf",
        "sizeBytes": 240306086912,
        "sizeGB": 240.31,
-       "quant": "Q5_K",
-       "bitsPerWeight": 5.69,
+       "quant": "UD-Q5_K_XL",
+       "bitsPerWeight": 5.84,
        "tier": "保守档",
        "tierDesc": "体积接近原始精度",
        "isSharded": true,
@@ -1076,7 +1111,7 @@
      "coverage": 2,
      "totalGB": 288.3,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 192.88,
       "tier": "平衡档",
       "name": "GLM-5.3-Flash-Q4_K_M.gguf"
@@ -1100,7 +1135,7 @@
        "path": "GLM-5.3-Flash-Q4_K_M.gguf",
        "sizeBytes": 192880442528,
        "sizeGB": 192.88,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -1130,7 +1165,7 @@
      "coverage": 5,
      "totalGB": 609.9,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 188.67,
       "tier": "平衡档",
       "name": "GLM-5.3-Flash-Q4_K_M.gguf"
@@ -1180,7 +1215,7 @@
        "path": "GLM-5.3-Flash-Q3_K_M.gguf",
        "sizeBytes": 149055924768,
        "sizeGB": 149.06,
-       "quant": "Q3_K",
+       "quant": "Q3_K_M",
        "bitsPerWeight": 3.55,
        "tier": "长上下文优先",
        "tierDesc": "KV 缓存也吃紧时的选择",
@@ -1193,7 +1228,7 @@
        "path": "GLM-5.3-Flash-Q4_K_M.gguf",
        "sizeBytes": 188673827008,
        "sizeGB": 188.67,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -1209,7 +1244,7 @@
      "isOfficial": false,
      "repo": "AesSedai/GLM-5.3-Flash-GGUF",
      "url": "https://huggingface.co/AesSedai/GLM-5.3-Flash-GGUF",
-     "license": null,
+     "license": "mit",
      "licenseLink": null,
      "downloads": 2158,
      "likes": 6,
@@ -1225,7 +1260,7 @@
      "coverage": 5,
      "totalGB": 782.6,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 201.98,
       "tier": "平衡档",
       "name": "GLM-5.3-Flash-Q4_K_M.gguf"
@@ -1275,7 +1310,7 @@
        "path": "Q4_K_M/GLM-5.3-Flash-Q4_K_M.gguf",
        "sizeBytes": 201982715200,
        "sizeGB": 201.98,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -1288,7 +1323,7 @@
        "path": "Q5_K_M/GLM-5.3-Flash-Q5_K_M.gguf",
        "sizeBytes": 240826164512,
        "sizeGB": 240.83,
-       "quant": "Q5_K",
+       "quant": "Q5_K_M",
        "bitsPerWeight": 5.69,
        "tier": "保守档",
        "tierDesc": "几乎无质量损失",
@@ -1297,7 +1332,9 @@
        "authorLabeled": false
       }
      ],
-     "variantCount": 5
+     "variantCount": 5,
+     "licenseInherited": true,
+     "licenseFrom": "zai-org/GLM-5.3-Flash"
     },
     {
      "quantizer": "qtum",
@@ -1528,8 +1565,8 @@
        "path": "UD-Q5_K_XL/GLM-5.3-Flash-UD-Q5_K_XL.gguf",
        "sizeBytes": 240306086912,
        "sizeGB": 240.31,
-       "quant": "Q5_K",
-       "bitsPerWeight": 5.69,
+       "quant": "UD-Q5_K_XL",
+       "bitsPerWeight": 5.84,
        "tier": "保守档",
        "tierDesc": "体积接近原始精度",
        "isSharded": true,
@@ -1714,8 +1751,8 @@
        "path": "UD-Q5_K_XL/GLM-5.3-Flash-UD-Q5_K_XL.gguf",
        "sizeBytes": 240306086912,
        "sizeGB": 240.31,
-       "quant": "Q5_K",
-       "bitsPerWeight": 5.69,
+       "quant": "UD-Q5_K_XL",
+       "bitsPerWeight": 5.84,
        "tier": "保守档",
        "tierDesc": "体积接近原始精度",
        "isSharded": true,
@@ -1756,7 +1793,7 @@
      "isOfficial": false,
      "repo": "ddh0/GLM-5.3-Flash-GGUF",
      "url": "https://huggingface.co/ddh0/GLM-5.3-Flash-GGUF",
-     "license": null,
+     "license": "mit",
      "licenseLink": null,
      "downloads": 862,
      "likes": 2,
@@ -1792,7 +1829,9 @@
        "authorLabeled": true
       }
      ],
-     "variantCount": 1
+     "variantCount": 1,
+     "licenseInherited": true,
+     "licenseFrom": "zai-org/GLM-5.3-Flash"
     },
     {
      "quantizer": "backpack-run",
@@ -1813,7 +1852,7 @@
      "coverage": 1,
      "totalGB": 180.5,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 193.81,
       "tier": "平衡档",
       "name": "GLM-5.3-Flash-Q4_K_M.gguf"
@@ -1824,7 +1863,7 @@
        "path": "GLM-5.3-Flash-Q4_K_M.gguf",
        "sizeBytes": 193813823776,
        "sizeGB": 193.81,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -1836,7 +1875,40 @@
      "variantCount": 1
     }
    ],
-   "variantCount": 10
+   "variantCount": 10,
+   "declaredParams": 321323031390,
+   "declaredBreakdown": {
+    "parameters": {
+     "BF16": 6926096640,
+     "F8_E4M3": 314396639232,
+     "F32": 295518
+    }
+   },
+   "createdAt": "2026-08-25T06:43:14.000Z",
+   "libraryName": "transformers",
+   "pipelineTag": "image-text-to-text",
+   "tags": [
+    "image-text-to-text",
+    "conversational",
+    "arXiv:2602.15763",
+    "license:mit"
+   ],
+   "hfArch": [
+    "Glm5NextForConditionalGeneration"
+   ],
+   "modelType": "glm5_next",
+   "inference": "warm",
+   "usedStorage": 656694929761,
+   "gated": false,
+   "derivedParams": 320820532096,
+   "derivedSpread": 9.3,
+   "derivedSamples": {
+    "cluster": 27,
+    "total": 56,
+    "from": "IQ2_XXS",
+    "to": "Q5_K"
+   },
+   "declaredVsDerived": 0.2
   }
  ],
  "collectedAt": "2026-09-30T02:06:20.048Z",
