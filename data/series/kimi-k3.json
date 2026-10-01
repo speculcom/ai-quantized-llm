@@ -26,14 +26,14 @@
     "zh": "Kimi K3",
     "en": "Kimi K3"
    },
-   "params": "2669B 总参（MoE，激活数未公开）",
+   "params": "2780B 总参（MoE，激活数未公开）",
    "role": {
     "zh": "通用",
     "en": "General"
    },
    "note": "许可为 other，须读发布页原文。",
    "license": "other",
-   "licenseLink": null,
+   "licenseLink": "https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE",
    "licenseName": "kimi-k3",
    "pipeline": "image-text-to-text",
    "downloads": 1364267,
@@ -512,7 +512,7 @@
      "isOfficial": false,
      "repo": "bullerwins/Kimi-K3-GGUF",
      "url": "https://huggingface.co/bullerwins/Kimi-K3-GGUF",
-     "license": null,
+     "license": "other",
      "licenseLink": null,
      "downloads": 115,
      "likes": 0,
@@ -548,7 +548,9 @@
        "authorLabeled": false
       }
      ],
-     "variantCount": 1
+     "variantCount": 1,
+     "licenseInherited": true,
+     "licenseFrom": "moonshotai/Kimi-K3"
     },
     {
      "quantizer": "aria220",
@@ -767,7 +769,41 @@
      "variantCount": 6
     }
    ],
-   "variantCount": 10
+   "variantCount": 10,
+   "declaredParams": 2779931837184,
+   "declaredBreakdown": {
+    "parameters": {
+     "F32": 11122432,
+     "BF16": 57179884544,
+     "U8": 2722740830208
+    }
+   },
+   "createdAt": "2026-06-13T06:42:57.000Z",
+   "libraryName": "transformers",
+   "pipelineTag": "image-text-to-text",
+   "tags": [
+    "feature-extraction",
+    "compressed-tensors",
+    "conversational",
+    "image-text-to-text",
+    "license:other"
+   ],
+   "hfArch": [
+    "KimiK3ForConditionalGeneration"
+   ],
+   "modelType": "kimi_k3",
+   "inference": "warm",
+   "usedStorage": 1561018243668,
+   "gated": false,
+   "derivedParams": 2668753027951,
+   "derivedSpread": 1.8,
+   "derivedSamples": {
+    "cluster": 10,
+    "total": 34,
+    "from": "UD-IQ1_M",
+    "to": "Q3_K"
+   },
+   "declaredVsDerived": 4.2
   }
  ],
  "collectedAt": "2026-09-30T02:06:20.056Z",
