@@ -51,7 +51,13 @@ for (const f of fs.readdirSync(DIR).filter((x) => x.endsWith('.json'))) {
           authorLabeled: !!r.declared,
         });
       }
-      if (kept.length !== before) touched = true;
+      //脏标记必须覆盖「聚合值/ recommended 变了」，不能只看文件数 ——
+      // 早先只判 kept.length !== before，导致文件数没变但 recommended 是脏数据时
+      // 不写盘，修不干净。当前数据里 ggml-org 有 4 个 variant 的 recommended
+      // 被fix-draft-models.mjs 写成了字符串（'覆盖 N 档'），构建时直接 TypeError。
+      const prevRec = v.recommended;
+      const prevCov = v.coverage;
+      const prevGB = v.totalGB;
       v.files = kept;
       v.variantCount = kept.length;
       // 重算聚合值
@@ -64,6 +70,10 @@ for (const f of fs.readdirSync(DIR).filter((x) => x.endsWith('.json'))) {
       v.recommended = rec
         ? { quant: rec.quant, sizeGB: rec.sizeGB, tier: rec.tier, name: rec.name }
         : null;
+      const recChanged = JSON.stringify(prevRec) !== JSON.stringify(v.recommended);
+      if (kept.length !== before || recChanged || prevCov !== v.coverage || prevGB !== v.totalGB) {
+        touched = true;
+      }
     }
   }
 
