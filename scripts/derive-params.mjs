@@ -11,7 +11,10 @@
 //   同一档位下所有文件算出的参数量应当一致（可作交叉校验）；
 //   不同档位之间也应当一致，若不一致说明 bpw 表有偏差 → 直接报出来。
 //
-// 输出：每个成员的建议值 + 交叉校验结果。
+// 输出：写回每个成员的 derivedParams（实测反推），并与官方申报总参
+// （merge-meta.mjs 从 safetensors 抓的 declaredParams）交叉校验。
+// 两个来源独立：一个来自 API 声明，一个来自文件实测字节数。
+// 差异大时以实测为准并标出 —— 声明值可能包含未训练/未激活的张量。
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -21,9 +24,13 @@ const DIR = path.resolve(HERE, '..', 'data', 'series');
 
 const fmt = (x) => (x >= 100 ? Math.round(x) : x >= 10 ? +x.toFixed(1) : +x.toFixed(2));
 
+let warned = 0;
+
 for (const f of fs.readdirSync(DIR).filter((x) => x.endsWith('.json'))) {
-  const j = JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8'));
+  const fp = path.join(DIR, f);
+  const j = JSON.parse(fs.readFileSync(fp, 'utf8'));
   console.log(`\n═══ ${j.name.zh} ═══`);
+  let dirty = false;
 
   for (const m of j.members) {
     const ests = [];
@@ -53,13 +60,30 @@ for (const f of fs.readdirSync(DIR).filter((x) => x.endsWith('.json'))) {
 
     const declared = m.params || '（config 未填）';
     const claimed = parseFloat(String(declared));
+
+    // 官方申报总参（safetensors.total，merge-meta.mjs 抓的）。这是独立第二来源。
+    const off = m.declaredParams || null;
+    const offDiff = off ? ((off - n) / n) * 100 : null;
+    // 差异判定：<4% 视为一致（反推本身有 bpw 表误差 + 未训练张量影响）。
+    const verdict = offDiff === null ? '—' : Math.abs(offDiff) < 4 ? '一致' : offDiff > 0 ? `实测少 ${offDiff.toFixed(0)}%` : `实测多 ${(-offDiff).toFixed(0)}%`;
     const agree = !Number.isNaN(claimed)
       ? Math.abs((n / 1e9 - claimed) / claimed) * 100 < 12 ? '一致' : '差 ' + Math.abs((n / 1e9 - claimed) / claimed * 100).toFixed(0) + '%'
       : '—';
 
+    // 写回数据：留痕用，A 区会把两个来源并排显示给用户看。
+    m.derivedParams = Math.round(n);
+    m.derivedSpread = +spread.toFixed(1);
+    m.derivedSamples = { cluster: best.length, total: ests.length, from: lo.quant, to: hi.quant };
+    if (off) m.declaredVsDerived = +offDiff.toFixed(1);
+    dirty = true;
+
     console.log(`  ${m.repo}`);
-    console.log(`    声明 ${declared}   反推 ${fmt(n / 1e9)}B  (${agree})`);
+    console.log(`    官网标注 ${declared}   官方API总参 ${off ? fmt(off / 1e9) + 'B' : '—'}   实测反推 ${fmt(n / 1e9)}B`);
+    console.log(`    官网标注vs反推 ${agree}   官方API vs 反推 ${verdict}`);
     console.log(`    主簇 ${best.length}/${ests.length} 个文件   簇内离散 ${spread.toFixed(1)}%   参考档 ${lo.quant}~${hi.quant}`);
     if (best.length < ests.length * 0.3) console.log(`    ⚠ 主簇只占 ${(100 * best.length / ests.length).toFixed(0)}%，样本质量存疑`);
+    if (verdict !== '一致' && verdict !== '—') { warned++; console.log(`    ⚠ 两来源不一致，以实测为准 → config.js 的 params 需按实测修正`); }
   }
+  if (dirty) fs.writeFileSync(fp, JSON.stringify(j, null, 1), 'utf8');
 }
+console.log(`\n写回完成。${warned} 个成员两来源不一致，需人工核对 params。`);
