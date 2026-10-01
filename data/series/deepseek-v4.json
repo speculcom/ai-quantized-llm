@@ -34,7 +34,7 @@
    },
    "note": "MIT 许可，47 家量化仓。",
    "license": "mit",
-   "licenseLink": null,
+   "licenseLink": "https://opensource.org/license/mit",
    "licenseName": null,
    "pipeline": "text-generation",
    "downloads": 1224401,
@@ -261,7 +261,7 @@
      "coverage": 3,
      "totalGB": 382.6,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 172.04,
       "tier": "平衡档",
       "name": "DeepSeek-V4-Flash-Q4_K_M.gguf"
@@ -285,7 +285,7 @@
        "path": "DeepSeek-V4-Flash-Q3_K_M.gguf",
        "sizeBytes": 135535174240,
        "sizeGB": 135.54,
-       "quant": "Q3_K",
+       "quant": "Q3_K_M",
        "bitsPerWeight": 3.55,
        "tier": "长上下文优先",
        "tierDesc": "KV 缓存也吃紧时的选择",
@@ -298,7 +298,7 @@
        "path": "DeepSeek-V4-Flash-Q4_K_M.gguf",
        "sizeBytes": 172037991008,
        "sizeGB": 172.04,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -327,7 +327,7 @@
      "declaredBase": [
       "deepseek-ai/DeepSeek-V4-Flash"
      ],
-     "coverage": 2,
+     "coverage": 3,
      "totalGB": 345.5,
      "recommended": {
       "quant": "MXFP4",
@@ -341,8 +341,8 @@
        "path": "DeepSeek-V4-Flash-Q2_K_S.gguf",
        "sizeBytes": 98592510368,
        "sizeGB": 98.59,
-       "quant": "Q2_K",
-       "bitsPerWeight": 2.8,
+       "quant": "Q2_K_S",
+       "bitsPerWeight": 2.71,
        "tier": "极限压缩",
        "tierDesc": "能装下就装，质量明显下降",
        "isSharded": true,
@@ -397,7 +397,7 @@
      "coverage": 7,
      "totalGB": 878.8,
      "recommended": {
-      "quant": "Q4_K",
+      "quant": "Q4_K_M",
       "sizeGB": 174.87,
       "tier": "平衡档",
       "name": "DeepSeek-V4-Flash-Q4_K_M-XL.gguf"
@@ -486,7 +486,7 @@
        "path": "Q4_K_M-XL/DeepSeek-V4-Flash-Q4_K_M-XL.gguf",
        "sizeBytes": 174869720032,
        "sizeGB": 174.87,
-       "quant": "Q4_K",
+       "quant": "Q4_K_M",
        "bitsPerWeight": 4.85,
        "tier": "平衡档",
        "tierDesc": "默认推荐，质量和体积的折中点",
@@ -595,7 +595,7 @@
      "isOfficial": false,
      "repo": "bullerwins/DeepSeek-V4-Flash-GGUF",
      "url": "https://huggingface.co/bullerwins/DeepSeek-V4-Flash-GGUF",
-     "license": null,
+     "license": "mit",
      "licenseLink": null,
      "downloads": 752,
      "likes": 6,
@@ -709,14 +709,16 @@
        "authorLabeled": false
       }
      ],
-     "variantCount": 7
+     "variantCount": 7,
+     "licenseInherited": true,
+     "licenseFrom": "deepseek-ai/DeepSeek-V4-Flash"
     },
     {
      "quantizer": "ddh0",
      "isOfficial": false,
      "repo": "ddh0/DeepSeek-V4-Flash-GGUF",
      "url": "https://huggingface.co/ddh0/DeepSeek-V4-Flash-GGUF",
-     "license": null,
+     "license": "mit",
      "licenseLink": null,
      "downloads": 464,
      "likes": 7,
@@ -778,10 +780,46 @@
        "authorLabeled": false
       }
      ],
-     "variantCount": 3
+     "variantCount": 3,
+     "licenseInherited": true,
+     "licenseFrom": "deepseek-ai/DeepSeek-V4-Flash"
     }
    ],
-   "variantCount": 7
+   "variantCount": 7,
+   "declaredParams": 290944616402,
+   "declaredBreakdown": {
+    "parameters": {
+     "BF16": 1415259264,
+     "I64": 2327040,
+     "F32": 36168018,
+     "F8_E4M3": 6023020544,
+     "I8": 283467841536
+    }
+   },
+   "createdAt": "2026-04-22T06:04:20.000Z",
+   "libraryName": "transformers",
+   "pipelineTag": "text-generation",
+   "tags": [
+    "text-generation",
+    "arXiv:2606.19348",
+    "license:mit"
+   ],
+   "hfArch": [
+    "DeepseekV4ForCausalLM"
+   ],
+   "modelType": "deepseek_v4",
+   "inference": "warm",
+   "usedStorage": 159641337663,
+   "gated": false,
+   "derivedParams": 291748778526,
+   "derivedSpread": 14.2,
+   "derivedSamples": {
+    "cluster": 27,
+    "total": 41,
+    "from": "IQ3_XXS",
+    "to": "Q3_K"
+   },
+   "declaredVsDerived": -0.3
   }
  ],
  "collectedAt": "2026-09-30T02:06:20.051Z",
