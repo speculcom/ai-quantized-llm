@@ -39,10 +39,26 @@ fi
 NFILES=$(wc -l < "$LIST" | tr -d ' ')
 echo "待推 $NFILES 个文件"
 
-ok=0; fail=0
+ok=0; fail=0; skip=0
 while IFS= read -r rel; do
   [ -z "$rel" ] && continue
   sha="$("$GH" api "repos/$REPO/contents/$rel" --jq '.sha' 2>/dev/null || echo '')"
+
+  # 内容未变就跳过：算本地 git blob sha1，与远程 blob sha 直接比。
+  # 不加这段每次都重推全部文件 —— 40+ 次 PUT 各触发一次 Pages 构建，纯浪费。
+  if [ -n "$sha" ]; then
+    local_sha=$(node -e '
+      const crypto=require("crypto"), fs=require("fs");
+      const b=fs.readFileSync(process.argv[1]);
+      console.log(crypto.createHash("sha1")
+        .update(Buffer.concat([Buffer.from("blob "+b.length+"\0"), b]))
+        .digest("hex"));
+    ' "$SRC/$rel")
+    if [ "$local_sha" = "$sha" ]; then
+      skip=$((skip+1)); continue
+    fi
+  fi
+
   node -e '
     const fs=require("fs");
     const src=process.argv[1], rel=process.argv[2], sha=process.argv[3], out=process.argv[4];
@@ -59,5 +75,5 @@ while IFS= read -r rel; do
 done < "$LIST"
 
 echo ""
-echo "更新 $ok | 失败 $fail"
+echo "更新 $ok | 未变跳过 $skip | 失败 $fail"
 echo "内容仓：https://github.com/$REPO"
