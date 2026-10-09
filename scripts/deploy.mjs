@@ -1,3 +1,8 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 // ============================================================================
 // 部署：site/ → speculcom/models（Pages 部署仓）
 // ----------------------------------------------------------------------------
@@ -10,11 +15,6 @@
 //
 // 用法：node scripts/deploy.mjs [owner/repo]   默认 speculcom/models
 // ============================================================================
-import fs from 'node:fs';
-import path from 'node:path';
-import crypto from 'node:crypto';
-import { execFileSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,7 +24,7 @@ function gitBlobSha(buf) {
   return crypto.createHash('sha1').update(Buffer.concat([head, buf])).digest('hex');
 }
 
-const GH = process.env.GH_BIN || 'C:/Users/chenhua/Desktop/1/gh_cli/bin/gh.exe';
+const GH = process.env.GH_BIN || 'gh';
 // PAT 只从环境变量读。硬编码进脚本会被 GitHub 密钥扫描拦下（409 拒绝写入）。
 const TOKEN = process.env.GH_TOKEN;
 if (!TOKEN) {
