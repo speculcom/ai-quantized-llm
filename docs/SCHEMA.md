@@ -140,3 +140,32 @@ C 级内容必须写成「我们的口径」并说明依据，不允许伪装成
 3. 每条必须能通过 `url` 反查到 `repo`
 4. 不下载、不托管任何权重文件
 5. gated 仓库（401/403）**跳过并记录**，不尝试绕过
+
+---
+
+## 两个校验器（分工不同，都要跑）
+
+| 脚本 | 管什么 |
+|---|---|
+| [`scripts/audit-licenses.mjs`](../scripts/audit-licenses.mjs) | **法律硬约束**（上面 5 条）+ 生成 `docs/audit-report.json` |
+| [`scripts/validate.mjs`](../scripts/validate.mjs) | **结构与我方口径**：`config.js` 必填字段、`positions` 封闭枚举、采集产物与名单对齐、三个翻译文件覆盖（R2）|
+
+```bash
+node scripts/validate.mjs        # 结构 + 中英一致性
+node scripts/audit-licenses.mjs  # 法律硬约束（建站前强制）
+```
+
+## 采集管线的**完整**顺序（中间两步容易漏，README 曾漏写）
+
+```bash
+node scripts/collect-models.mjs     # ① 采集（hf-mirror，11 系列约 3~5 分钟）
+node scripts/fix-quants.mjs         # ② 重套档名规则 + 删非权重文件（mmproj/tokenizer/imatrix）
+                                    #    实测新采数据里混进过 210 个非权重文件；漏了这步，
+                                    #    页面会建议「直接下 非权重文件（0.0 GB，未识别）」
+node scripts/backfill-license.mjs   # ③ 量化变体继承基座许可（写 licenseInherited/licenseFrom 留痕）
+                                    #    多数 HF 量化仓的 model card 里本来就没有 license 字段
+node scripts/validate.mjs           # ④ 结构与我方口径
+node scripts/audit-licenses.mjs     # ⑤ 法律硬约束（不合规则 exit 1，中止建站）
+node scripts/build.mjs              # ⑥ 建站
+```
+
