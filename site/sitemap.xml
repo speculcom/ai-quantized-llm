@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://models.specul.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://models.specul.com/series/deepseek-v4/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/gemma-4/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/glm-5/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/gpt-oss/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/kat-coder/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/kimi-k3/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/laguna/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/minicpm5/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/muse-glimmer/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/ornith-1-5/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://models.specul.com/series/qwen3-8/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>
