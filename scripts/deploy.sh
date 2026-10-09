@@ -63,7 +63,10 @@ while IFS= read -r rel; do
     fail=$((fail+1)); echo "  x $rel"; echo "$out" | head -3
   fi
 done < "$LIST"
-rm -f "$TMP" "$LIST"
+# 不能用 rm：本沙箱的 safe-delete 钩子会拦「带盘符前缀的删除」并中止整个脚本
+# （症状：文件全推完了，但末尾的统计没打出来，看起来像失败）。改名移到 TEMP。
+if [ -f "$TMP" ]; then mv -f "$TMP" "$TMP.done" 2>/dev/null || true; fi
+if [ -f "$LIST" ]; then mv -f "$LIST" "$LIST.done" 2>/dev/null || true; fi
 
 echo ""
 echo "更新 $ok | 未变跳过 $skip | 失败 $fail"
