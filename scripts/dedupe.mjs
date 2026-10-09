@@ -1,11 +1,14 @@
+import { fileURLToPath } from 'node:url';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 // 后处理：去掉采集产物里的重复量化仓
 // 起因：collect-models.mjs 的 seen.add() 没接线（写在未被执行的分支里），
 // 导致同一 id 被收两次（实测 openbmb/MiniCPM5-2B-GGUF 重复）。
 // 已在采集脚本里修好；这个脚本用于清理已有 JSON，不必重跑 5 分钟采集。
-import fs from 'node:fs';
-import path from 'node:path';
 
-const DIR = 'C:/Users/chenhua/Desktop/specul/_data/models/data/series';
+const DIR = path.resolve(HERE, '..', 'data', 'series');
 let fixed = 0, total = 0;
 
 for (const f of fs.readdirSync(DIR).filter((x) => x.endsWith('.json'))) {
