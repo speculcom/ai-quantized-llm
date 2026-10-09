@@ -46,23 +46,46 @@ _data/models/
 ## 常用命令
 
 ```bash
-# 采集（注意 hf-mirror 限流，串行 900ms 间隔，约 6~9 分钟）
+# ① 采集（注意 hf-mirror 限流，串行 900ms 间隔；耗时随系列数增长，系列数见文末实测规模）
 node scripts/collect-models.mjs
 
-# 审计（不合规则 exit 1，中止建站）
+# ② 后处理：重新套用档名规则（**必须有这一步**）
+#    实测新采数据里混进 210 个非权重文件（mmproj / tokenizer / imatrix …），
+#    跳过它会让页面建议「直接下 非权重文件（0.0 GB，未识别）」，models-check 会报「未识别」。
+#    它同时重算 coverage / totalGB / recommended。
+node scripts/fix-quants.mjs
+
+# ③ 回填量化变体的许可（**必须有这一步**）
+#    实测多数 HF 量化仓的 model card 里就没有 license 字段（bartowski / AtomicChat / AesSedai …），
+#    不是采集失败 —— 量化是权重的数学变换，许可必然继承基座。
+#    脚本会写 licenseInherited + licenseFrom 留痕，页面据此标注「继承自基座」。
+node scripts/backfill-license.mjs
+
+# ④ 审计（不合规则 exit 1，中止建站）
 node scripts/audit-licenses.mjs
 
-# 建站
+# ⑤ 建站
 node scripts/build.mjs
 ```
+
+> ⚠ **第 ②③ 步曾在 README 里漏写**（2026-10-09 A6.5 补录时连续踩到：直接跳到审计，
+> 先报「量化变体缺 license」中止建站，补了回填后又发现页面上有「未识别」）。
+> **采集之后、审计之前，这两步都不能省。**
 
 ## 改系列名单的流程
 
 1. 编辑 `config.js` 的 `SERIES` 数组
-2. 重跑 `collect-models.mjs`
-3. 跑 `audit-licenses.mjs` 确认合规
-4. 跑 `build.mjs` 生成
-5. 部署
+2. **同步两个翻译文件**（否则英文态露出中文，构建会 warn 报缺键）
+   - `summaries.en.json` —— 键 = `<seriesCode>`
+   - `member-notes.en.json` —— 键 = `<seriesCode>|<repo名>`
+3. 重跑 `collect-models.mjs`
+4. 跑 `fix-quants.mjs`（删非权重文件，见上方警告）
+5. 跑 `backfill-license.mjs`（见上方警告）
+6. 跑 `audit-licenses.mjs` 确认合规
+7. 跑 `build.mjs` 生成
+8. **同步跨站数字**：`_data/glossary/terms/参数.md`（「N 系列 M 规格」）、`www.specul/index.html` 的徽标
+   —— 这两处有 `_audit/content-freshness.mjs` 的「www枢纽」/learn 守卫盯着，漂了会报
+9. 部署
 
 **不要手改 `data/series/*.json`** —— 那是脚本产物，下次采集会被覆盖。
 
@@ -100,7 +123,19 @@ node scripts/build.mjs
 |---|---|
 | [specul.com](https://specul.com/) | 首页 · 总入口 |
 | [nav.specul.com](https://nav.specul.com/) | 导航 · AI 站点目录 |
-| [ide.specul.com](https://ide.specul.com/) | IDE 图谱 · 产品层 |
-| [cli.specul.com](https://cli.specul.com/) | CLI 图谱 · 产品层 |
-| [mcp.specul.com](https://mcp.specul.com/) | MCP 图谱 · 组件层 |
-| [keel.specul.com](https://keel.specul.com/) | 规划中 |
+| [agent.specul.com](https://agent.specul.com/) | Agent 图谱 · 成品 agent / harness / MCP 工具 |
+| [learn.specul.com](https://learn.specul.com/) | 术语表 · 概念层 |
+| [vg.specul.com](https://vg.specul.com/) | AI 做游戏 · 实践层 |
+
+## 实测规模（A8）
+
+<!-- STATS:BEGIN 由 _audit/gen-repo-docs.mjs 生成，勿手改 -->
+| 项 | 实测值 |
+|---|---|
+| 系列 | 11 个 |
+| 模型仓（members） | 16 个 |
+| 量化档（variants） | 132 个 |
+| GGUF 文件 | 1253 个 |
+| 量化者 | 55 位 |
+| 基座许可分布 | apache-2.0 8 · mit 4 · other 3 · openmdw-1.1 1 |
+<!-- STATS:END -->
