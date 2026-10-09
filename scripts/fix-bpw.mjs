@@ -1,10 +1,13 @@
-// 后处理：给「作者在文件名里标了 bpw」的变体补标档位
-// 起因：DeepSeek-V4-Flash-MTP-3.93bpw.gguf 这类文件名不认标准档名，
-// 但作者自己标了每权重比特数 → 采信作者标注（仍标为推导，说明来源是文件名而非标准表）
+import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const DIR = 'C:/Users/chenhua/Desktop/specul/_data/models/data/series';
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+// 后处理：给「作者在文件名里标了 bpw」的变体补标档位
+// 起因：DeepSeek-V4-Flash-MTP-3.93bpw.gguf 这类文件名不认标准档名，
+// 但作者自己标了每权重比特数 → 采信作者标注（仍标为推导，说明来源是文件名而非标准表）
+
+const DIR = path.resolve(HERE, '..', 'data', 'series');
 
 const TIERS = [
   { max: 3.0, tier: '极限压缩' },
