@@ -1,3 +1,8 @@
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import fs from 'node:fs';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 // ============================================================================
 // 选型 v2 —— 厂商定向摸底 + 降噪
 // ----------------------------------------------------------------------------
@@ -8,10 +13,9 @@
 //   b) 厂商定向：对每个厂商查最新代基础模型，再查它有没有 GGUF 量化覆盖
 //   c) 只保留「有第三方 GGUF 量化」的系列——没量化就没必要上站
 // ============================================================================
-import fs from 'node:fs';
 
 const MIRROR = 'https://hf-mirror.com';
-const OUT = 'C:/Users/chenhua/Desktop/specul/_data/models';
+const OUT = path.resolve(HERE, '..');
 const NOW = new Date('2026-09-30');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const days = (iso) => (iso ? (NOW - new Date(iso)) / 86400000 : 9999);
