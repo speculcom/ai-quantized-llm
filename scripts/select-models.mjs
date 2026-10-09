@@ -1,3 +1,8 @@
+import { fileURLToPath } from 'node:url';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 // ============================================================================
 // 选型方法 v1 —— 从「实际被下载的 GGUF 量化仓」反推最热门的基础模型
 // ----------------------------------------------------------------------------
@@ -14,11 +19,9 @@
 // 输出：_data/models/docs/selection-report.json
 // 时间预算：约 60~90 秒（受 HF 响应速度影响）
 // ============================================================================
-import fs from 'node:fs';
-import path from 'node:path';
 
 const MIRROR = 'https://hf-mirror.com';
-const OUT = 'C:/Users/chenhua/Desktop/specul/_data/models';
+const OUT = path.resolve(HERE, '..');
 const NOW = new Date('2026-09-30');
 
 const log10 = (n) => Math.log10(Math.max(1, n));
