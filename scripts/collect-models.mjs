@@ -1,3 +1,10 @@
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import fs from 'node:fs';
+import { SERIES, SECONDARY_QUANTIZERS, PRIMARY_QUANTIZERS } from '../config.js';
+import { parseQuant, tierOf } from './quant-rules.mjs';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 // ============================================================================
 // 采集：从 HF 公开 API 拉取每个系列成员的量化变体全量清单
 // ----------------------------------------------------------------------------
@@ -13,11 +20,9 @@
 //
 // 时间预算：7 系列 × (1 + 1 + N) 次请求，约 3~5 分钟
 // ============================================================================
-import fs from 'node:fs';
-import { SERIES, SECONDARY_QUANTIZERS, PRIMARY_QUANTIZERS } from '../config.js';
 
 const MIRROR = 'https://hf-mirror.com';
-const OUT = 'C:/Users/chenhua/Desktop/specul/_data/models';
+const OUT = path.resolve(HERE, '..');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // hf-mirror 有速率限制：请求过密会静默返回非 200（看起来像 404）。
@@ -51,7 +56,6 @@ async function api(p) {
 
 // ── 量化文件名解析规则来自 ./quant-rules.mjs（采集与后处理共用一份） ──────────
 // bitsPerWeight 是「按命名推算」，属 B 级信息；规则清单与出处见 docs/METHODOLOGY.md
-import { parseQuant, tierOf } from './quant-rules.mjs';
 
 // ── 主流程 ───────────────────────────────────────────────────────────────
 const out = [];
