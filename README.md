@@ -1,5 +1,7 @@
 # AI Quantized LLM Atlas
 
+> English version: [README.en.md](./README.en.md)
+
 > **本地部署量化模型图谱** —— 只回答一个问题：这个基础模型，我该下载哪个量化版、为什么。
 >
 > 线上：https://models.specul.com/
