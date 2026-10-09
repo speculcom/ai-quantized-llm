@@ -1,5 +1,9 @@
-// 探针 5：定稿名单核对 —— 各厂商「最新代 + 本地可跑规模(7~35B 或 MoE 激活小)」
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import fs from 'node:fs';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+// 探针 5：定稿名单核对 —— 各厂商「最新代 + 本地可跑规模(7~35B 或 MoE 激活小)」
 const MIRROR = 'https://hf-mirror.com';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function api(p) { try { const r = await fetch(MIRROR + p, { signal: AbortSignal.timeout(20000) }); return r.ok ? await r.json() : null; } catch { return null; } }
@@ -61,4 +65,4 @@ for (const [owner, name] of CAND) {
   console.log('        量化者:', topQ.map(([o, d]) => `${o}(${Math.round(d / 1000)}k)`).join(' '));
 }
 
-fs.writeFileSync('C:/Users/chenhua/Desktop/specul/_data/models/docs/final-candidates.json', JSON.stringify(rows, null, 2));
+fs.writeFileSync(path.resolve(HERE, '..', 'docs', 'final-candidates.json'), JSON.stringify(rows, null, 2));
