@@ -31,7 +31,7 @@
     "zh": "代码 / 工具调用",
     "en": "Coding & tool use"
    },
-   "note": "许可 **OpenMDW-1.1**（非 apache/mit），使用前须读发布页许可原文；20 个 GGUF 仓，官方自己也出 GGUF。",
+   "note": "许可为 OpenMDW-1.1（非 apache/mit），使用前须读发布页许可原文；20 个 GGUF 仓，官方自己也出 GGUF。",
    "license": "openmdw-1.1",
    "licenseLink": null,
    "licenseName": null,
