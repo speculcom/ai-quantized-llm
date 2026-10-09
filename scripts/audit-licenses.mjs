@@ -1,3 +1,8 @@
+import { fileURLToPath } from 'node:url';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 // ============================================================================
 // 审计：建站前的强制校验
 // ----------------------------------------------------------------------------
@@ -12,10 +17,8 @@
 //   E. 每个系列至少 1 个成员、每个成员至少 1 个量化变体
 //   F. 所有量化档位必须能被 QUANT_MAP 识别（未识别档位说明命名标准变了，需人工核对）
 // ============================================================================
-import fs from 'node:fs';
-import path from 'node:path';
 
-const OUT = 'C:/Users/chenhua/Desktop/specul/_data/models';
+const OUT = path.resolve(HERE, '..');
 const DIR = `${OUT}/data/series`;
 
 const problems = [];
