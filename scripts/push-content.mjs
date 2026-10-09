@@ -1,3 +1,8 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 // ============================================================================
 // 内容仓推送：_data/models/{data,docs,scripts,config.js,README.md}
 //           → speculcom/ai-quantized-llm
@@ -5,15 +10,10 @@
 // 与 deploy.mjs 同机制（gh.exe + Contents API，git transport 被沙箱封锁）。
 // 差异：内容仓要推 docs/ 里的原始调研数据（选型过程），让「为什么选这几个模型」可追溯。
 // ============================================================================
-import fs from 'node:fs';
-import path from 'node:path';
-import crypto from 'node:crypto';
-import { execFileSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
-const GH = process.env.GH_BIN || 'C:/Users/chenhua/Desktop/1/gh_cli/bin/gh.exe';
+const GH = process.env.GH_BIN || 'gh';
 // PAT 只从环境变量读。硬编码进脚本会被 GitHub 密钥扫描拦下（409 拒绝写入）。
 const TOKEN = process.env.GH_TOKEN;
 if (!TOKEN) {
