@@ -882,7 +882,7 @@ ${companionBlock()}
     // 子页在 /series/<code>/（两級深），品牌资源在站点根 → 需要 ../../ 才回到根。
     // 深度算错的表现是子页静默丢样式（本地服务 404，但不报错，最容易漏）。
     assetPrefix: '../../',
-    title: `${s.name.zh} 量化版对比 · Models 图谱`,
+    title: `${s.name.zh} 量化版 · 本地部署`,
     desc: `${s.name.zh}（${s.vendor.zh}）的第三方 GGUF 量化版本对比：${s.members.length} 个规格、${s.members.reduce((n, m) => n + m.variantCount, 0)} 个量化来源，含实测文件体积、许可、上下文长度与选档建议。`,
     canonical: `${DOMAIN}series/${s.code}/`,
     accent: ACCENT,
@@ -943,9 +943,9 @@ function indexPage() {
 
   const body = `  <div class="container">
     <header class="page-head home-head">
-      <p class="eyebrow">${bi('模型层 · 本地部署','Model layer · local deployment')}</p>
-      <h1>Models 图谱<span class="sub">${bi('量化版对比','quantisation comparison')}</span></h1>
-      <p class="lede">${bi('你决定用哪个模型之后，真正要面对的问题是：<b>同一模型有几十个量化版，我该下哪一个？</b><br>本站只回答这一个问题——不评模型强弱，只帮你选对量化版。', 'Once you have picked a model, the real question is: <b>a given model has dozens of quantisations — which one do I download?</b><br>This site answers only that. It does not rank models against each other; it helps you pick the right quantisation.')}</p>
+      <p class="eyebrow">${bi('本地部署 · 量化版索引','Run it locally · quantisation index')}</p>
+      <h1><span class="grad-title">${bi('挑对量化版，适配你的本地硬件','Pick the quantisation that fits your hardware')}</span><span class="sub">${bi('同一个模型几十个版本，按你的显存选','Dozens of builds per model — pick the one that fits your VRAM')}</span></h1>
+      <p class="lede">${bi('你想在<b>自己电脑上</b>跑一个大模型，卡住的往往不是选哪个模型，而是——<b>同一个模型有几十个量化版，我该下哪一个？</b><br>本站就管这一件事：告诉你<b>你的显卡能跑哪个版本、该下多大体积</b>。不评模型强弱，也不排名。', 'You want to run a large model <b>on your own machine</b>. The hard part usually isn\'t choosing the model — it\'s that <b>a single model has dozens of quantisations, and which one should I download?</b><br>This site answers exactly that: <b>which build your GPU can run, and how big the download is.</b> It does not rank models against each other.')}</p>
       <p class="lede lede-sub">${bi('<b>收录范围：只收开放权重、可本地部署的开源模型</b>（HF 上有公开权重的 MoE 与 dense模型）。闭源 / API-only 模型不在收录范围内——它们没有量化产物，下载和选型的问题不存在。', '<b>Scope: open-weight models you can run locally</b> (MoE and dense models with public weights on HF). Closed-source / API-only models are out of scope — they have no quantisations, so the download and selection questions do not arise.')}</p>
 <div class="home-stats">
 <div><b>${seriesList.length}</b><span>${bi('个系列','series')}</span></div>
@@ -1007,8 +1007,8 @@ ${allOwners.map((o) => `        <a class="qchip" href="series/qwen3-8/#e0"><code
 
   return shell({
     current: 'models',
-    title: 'Models 图谱 · 本地部署量化模型对比',
-    desc: `本地部署量化模型索引：${seriesList.length} 个系列、${totalRepo} 个模型仓、${totalTier} 个量化档、${allOwners.length} 位量化者、${totalFile} 个 GGUF 文件。按显存选档、横向对比量化者，每个数字都标注来源。不跑 benchmark，不托管权重。`,
+    title: '挑对量化版 · 本地部署模型图谱',
+    desc: `想在本地跑大模型？告诉你你的显卡能跑哪个量化版、该下多大体积。${seriesList.length} 个系列、${totalRepo} 个模型仓、${totalTier} 个量化档、${allOwners.length} 位量化者、${totalFile} 个 GGUF 文件，每个数字都标注来源。不跑 benchmark，不托管权重。`,
     canonical: DOMAIN,
     accent: ACCENT,
     body,
@@ -1017,9 +1017,9 @@ repo: 'https://github.com/speculcom/ai-quantized-llm',
       repoLabel: '<span data-zh>数据仓</span><span data-en>Data repo</span>',
     jsonLd: {
       '@context': 'https://schema.org', '@type': 'WebSite',
-      name: 'Models 图谱 · 本地部署量化模型对比',
+      name: '挑对量化版 · 本地部署模型图谱',
       url: DOMAIN,
-      description: '只回答一个问题：这个基础模型，我该下载哪个量化版、为什么。',
+      description: '想在本地跑大模型，告诉你你的显卡能跑哪个量化版、该下多大体积。不评模型强弱，不排名。',
     },
   });
 }
@@ -1358,13 +1358,27 @@ for (const f of ['brand.css', 'brand.js']) {
   if (fs.existsSync(src)) fs.copyFileSync(src, path.join(SITE, f));
   else console.log('⚠ 缺品牌文件', f);
 }
-fs.writeFileSync(path.join(SITE, 'site.css'), CSS + FILTER_CSS);
+/* ⚠ 2026-10-10：site.css 的**真相源改为真实文件** `css/models.css`。
+ *
+ * 原先 CSS 是本文件里的两个模板字符串（`const CSS = \`…\`` + `const FILTER_CSS = \`…\``），
+ * 后果是：改样式要动 .mjs、CSS 门禁扫不到它、`site/` 既是产物又像源（看着能改，实际会被覆盖）。
+ * 抽取时已验证：CSS 内容与抽取前**逐字符相同**，产物差异仅为新增的一行分节注释 ✓
+ * （零模板插值，是纯静态文本；`node _tmp/verify-models-css-extract.mjs` 可复验）。
+ *
+ * R3（内容库自足）：本仓单独 clone 后仍要能构建，所以源文件放在**仓内** `css/models.css`，
+ * 随仓一起走 —— 不能放工作区，那会让 clone-build 门禁挂掉。 */
+const SITE_CSS_SRC = path.join(ROOT, 'css', 'models.css');
+if (!fs.existsSync(SITE_CSS_SRC)) {
+  console.error('✗ 缺 ' + SITE_CSS_SRC + ' —— 样式源文件丢了，构建中止');
+  process.exit(1);
+}
+fs.writeFileSync(path.join(SITE, 'site.css'), fs.readFileSync(SITE_CSS_SRC, 'utf8'));
 fs.writeFileSync(path.join(SITE, 'CNAME'), 'models.specul.com\n');
 fs.writeFileSync(path.join(SITE, '.nojekyll'), '');
 fs.writeFileSync(path.join(SITE, 'robots.txt'), 'User-agent: *\nAllow: /\nSitemap: https://models.specul.com/sitemap.xml\n');
 {
   const lines = [
-    '# Models 图谱 · 本地部署量化模型对比',
+    '# 挑对量化版 · 本地部署模型图谱',
     '> 只回答一个问题：这个基础模型，我该下载哪个量化版、为什么。',
     '> 不跑 benchmark，不给质量与速度结论，不托管任何模型权重文件。',
     '',
