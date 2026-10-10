@@ -891,8 +891,6 @@ ${companionBlock()}
     accent: ACCENT,
     body,
 repo: 'https://github.com/speculcom/ai-quantized-llm',
-      /* repoLabel 直接进 HTML，footer() 不做翻译 —— 传纯中文会在英文态露「数据仓」。 */
-      repoLabel: '<span data-zh>数据仓</span><span data-en>Data repo</span>',
     jsonLd: {
       '@context': 'https://schema.org', '@type': 'Dataset',
       name: `${s.name.zh} GGUF 量化版本索引`,
@@ -1016,8 +1014,6 @@ ${allOwners.map((o) => `        <a class="qchip" href="series/qwen3-8/#e0"><code
     accent: ACCENT,
     body,
 repo: 'https://github.com/speculcom/ai-quantized-llm',
-      /* repoLabel 直接进 HTML，footer() 不做翻译 —— 传纯中文会在英文态露「数据仓」。 */
-      repoLabel: '<span data-zh>数据仓</span><span data-en>Data repo</span>',
     jsonLd: {
       '@context': 'https://schema.org', '@type': 'WebSite',
       name: '挑对量化版 · 本地部署模型图谱',
