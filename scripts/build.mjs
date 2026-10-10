@@ -27,7 +27,10 @@ const { shell, esc } = await import(
   'file:///' + SHELL_SRC.replace(/\\/g, '/')
 );
 
-const ACCENT = '#22d3c5';
+/* ⚠ 2026-10-10：原 '#22d3c5'（青色 accent）已取消 —— 分站专属色不再使用。
+   * 改为 null：--accent 落回 brand.css 的 var(--brand)，六站统一为品牌紫 ✓
+   * 保留 ACCENT 这个名字是为了 shell() 的调用点不必改（两处传值）。 */
+const ACCENT = null;
 /* 双语节点（2026-10-04）。
  * models 是静态站点：语言切换只切 <html lang> / data-lang，**DOM 不重渲染**
  * → 构建期不能判断语言，必须同时给出中英，由 brand.css 的 [data-lang] 选显。
