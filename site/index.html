@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Models 图谱 · 本地部署量化模型对比</title>
-  <meta name="description" content="本地部署量化模型索引：11 个系列、16 个模型仓、132 个量化档、55 位量化者、1253 个 GGUF 文件。按显存选档、横向对比量化者，每个数字都标注来源。不跑 benchmark，不托管权重。" />
+  <title>挑对量化版 · 本地部署模型图谱</title>
+  <meta name="description" content="想在本地跑大模型？告诉你你的显卡能跑哪个量化版、该下多大体积。11 个系列、16 个模型仓、132 个量化档、55 位量化者、1253 个 GGUF 文件，每个数字都标注来源。不跑 benchmark，不托管权重。" />
   <link rel="canonical" href="https://models.specul.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Models 图谱 · 本地部署量化模型对比" />
+  <meta property="og:site_name" content="挑对量化版 · 本地部署模型图谱" />
   <meta property="og:url" content="https://models.specul.com/" />
-  <meta property="og:title" content="Models 图谱 · 本地部署量化模型对比" />
-  <meta property="og:description" content="本地部署量化模型索引：11 个系列、16 个模型仓、132 个量化档、55 位量化者、1253 个 GGUF 文件。按显存选档、横向对比量化者，每个数字都标注来源。不跑 benchmark，不托管权重。" />
+  <meta property="og:title" content="挑对量化版 · 本地部署模型图谱" />
+  <meta property="og:description" content="想在本地跑大模型？告诉你你的显卡能跑哪个量化版、该下多大体积。11 个系列、16 个模型仓、132 个量化档、55 位量化者、1253 个 GGUF 文件，每个数字都标注来源。不跑 benchmark，不托管权重。" />
   <meta name="theme-color" content="#16121f" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b7cf8'/%3E%3Cstop offset='1' stop-color='%2322d3c5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='12' fill='%2305080f'/%3E%3Cpath d='M14 32 L24 12 L34 32' fill='none' stroke='url(%23g)' stroke-width='2.4' stroke-linejoin='round'/%3E%3Ccircle cx='24' cy='27' r='2.4' fill='%2322d3c5'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="brand.css" />
   <link rel="stylesheet" href="site.css" />
   <style>:root { --accent: #22d3c5; }</style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Models 图谱 · 本地部署量化模型对比","url":"https://models.specul.com/","description":"只回答一个问题：这个基础模型，我该下载哪个量化版、为什么。"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"挑对量化版 · 本地部署模型图谱","url":"https://models.specul.com/","description":"想在本地跑大模型，告诉你你的显卡能跑哪个量化版、该下多大体积。不评模型强弱，不排名。"}</script>
 </head>
 <!-- B6（2026-10-09）：--accent 原先在这里被**内联到 body 上**（style="--accent:X"），
      同时头部又写了 :root{--accent:X} —— 两处同一份值，冗余。
@@ -33,6 +33,7 @@
         <span class="brand-dot" aria-hidden="true"></span>
         <span class="brand-text">
           <span class="brand-name" id="markName" data-zh-name="投机取巧" data-en-name="Speculative Speculation">投机取巧</span>
+          <span class="brand-sub" id="markSub" data-zh-sub="Speculative Speculation" data-en-sub="">Speculative Speculation</span>
         </span>
       </a>
       <nav class="nav-links" aria-label="站点导航">
@@ -60,6 +61,7 @@
   <aside class="nav-drawer" id="navDrawer" aria-hidden="true" aria-label="站点导航">
     <div class="nav-drawer-h">
       <span class="brand-name"><span data-zh>投机取巧</span><span data-en>Speculative Speculation</span></span>
+      <span class="brand-sub" data-zh-sub="Speculative Speculation" data-en-sub="">Speculative Speculation</span>
       <button class="nav-dclose" type="button" aria-label="关闭">×</button>
     </div>
     <nav class="nav-drawer-list">
@@ -78,9 +80,9 @@
   <main id="main">
   <div class="container">
     <header class="page-head home-head">
-      <p class="eyebrow"><span data-zh>模型层 · 本地部署</span><span data-en>Model layer · local deployment</span></p>
-      <h1>Models 图谱<span class="sub"><span data-zh>量化版对比</span><span data-en>quantisation comparison</span></span></h1>
-      <p class="lede"><span data-zh>你决定用哪个模型之后，真正要面对的问题是：<b>同一模型有几十个量化版，我该下哪一个？</b><br>本站只回答这一个问题——不评模型强弱，只帮你选对量化版。</span><span data-en>Once you have picked a model, the real question is: <b>a given model has dozens of quantisations — which one do I download?</b><br>This site answers only that. It does not rank models against each other; it helps you pick the right quantisation.</span></p>
+      <p class="eyebrow"><span data-zh>本地部署 · 量化版索引</span><span data-en>Run it locally · quantisation index</span></p>
+      <h1><span class="grad-title"><span data-zh>挑对量化版，适配你的本地硬件</span><span data-en>Pick the quantisation that fits your hardware</span></span><span class="sub"><span data-zh>同一个模型几十个版本，按你的显存选</span><span data-en>Dozens of builds per model — pick the one that fits your VRAM</span></span></h1>
+      <p class="lede"><span data-zh>你想在<b>自己电脑上</b>跑一个大模型，卡住的往往不是选哪个模型，而是——<b>同一个模型有几十个量化版，我该下哪一个？</b><br>本站就管这一件事：告诉你<b>你的显卡能跑哪个版本、该下多大体积</b>。不评模型强弱，也不排名。</span><span data-en>You want to run a large model <b>on your own machine</b>. The hard part usually isn't choosing the model — it's that <b>a single model has dozens of quantisations, and which one should I download?</b><br>This site answers exactly that: <b>which build your GPU can run, and how big the download is.</b> It does not rank models against each other.</span></p>
       <p class="lede lede-sub"><span data-zh><b>收录范围：只收开放权重、可本地部署的开源模型</b>（HF 上有公开权重的 MoE 与 dense模型）。闭源 / API-only 模型不在收录范围内——它们没有量化产物，下载和选型的问题不存在。</span><span data-en><b>Scope: open-weight models you can run locally</b> (MoE and dense models with public weights on HF). Closed-source / API-only models are out of scope — they have no quantisations, so the download and selection questions do not arise.</span></p>
 <div class="home-stats">
 <div><b>11</b><span><span data-zh>个系列</span><span data-en>series</span></span></div>
@@ -383,7 +385,7 @@
     </section>
   </div>
   <!-- B2：系列筛选（脚本在 site-filter.js，读 .sfilter 作用域） -->
-  <script>/* Models 图谱 · 客户端筛选（B2，2026-10-09）
+  <script>/* 挑对量化版 · 本地部署模型图谱 · 客户端筛选（B2，2026-10-09）
  *
  * 为什么单独一个文件而不是塞进 build.mjs 的模板字符串：
  *   build.mjs 生成页面用的是模板字符串，脚本里任何反引号或 ${} 都会**提前截断/插值**。
