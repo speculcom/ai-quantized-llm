@@ -32,7 +32,7 @@
 
 .page-head{margin-bottom:var(--section-pad-sm)}
 .eyebrow{color:var(--brand);font-size:var(--fs-xs);letter-spacing:.08em;margin:0 0 .4em}
-.page-head h1{font-size:var(--display-sub);margin:0 0 .3em;line-height:1.14;letter-spacing:-.015em}
+.page-head h1{margin:0 0 .3em}
 .page-head h1 .sub{display:block;font-size:var(--fs-xs);color:var(--ink-dim);font-weight:400;letter-spacing:0;margin-top:.5em}
 .lede{color:var(--text-dim);font-size:var(--fs-sm);line-height:1.75;max-width:var(--measure)}
 .home-head{margin-bottom:2em}
